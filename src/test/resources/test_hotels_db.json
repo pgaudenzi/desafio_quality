@@ -1,0 +1,122 @@
+[
+  {
+    "code": "CH-0002",
+    "name": "Cataratas Hotel",
+    "location": "Puerto Iguazú",
+    "roomType": "Doble",
+    "price": 6300,
+    "dateFrom": "2021-02-10",
+    "dateTo": "2021-03-20",
+    "booked": "NO"
+  },
+  {
+    "code": "CH-0003",
+    "name": "Cataratas Hotel 2",
+    "location": "Puerto Iguazú",
+    "roomType": "Triple",
+    "price": 8200,
+    "dateFrom": "2021-02-10",
+    "dateTo": "2021-03-23",
+    "booked": "NO"
+  },
+  {
+    "code": "HB-0001",
+    "name": "Hotel Bristol",
+    "location": "Buenos Aires",
+    "roomType": "Single",
+    "price": 5435,
+    "dateFrom": "2021-02-10",
+    "dateTo": "2021-03-19",
+    "booked": "NO"
+  },
+  {
+    "code": "BH-0002",
+    "name": "Hotel Bristol 2",
+    "location": "Buenos Aires",
+    "roomType": "Doble",
+    "price": 7200,
+    "dateFrom": "2021-02-12",
+    "dateTo": "2021-04-17",
+    "booked": "NO"
+  },
+  {
+    "code": "SH-0002",
+    "name": "Sheraton",
+    "location": "Tucumán",
+    "roomType": "Doble",
+    "price": 5790,
+    "dateFrom": "2021-04-17",
+    "dateTo": "2021-05-23",
+    "booked": "NO"
+  },
+  {
+    "code": "SH-0001",
+    "name": "Sheraton 2",
+    "location": "Tucumán",
+    "roomType": "Single",
+    "price": 4150,
+    "dateFrom": "2021-01-02",
+    "dateTo": "2021-02-19",
+    "booked": "NO"
+  },
+  {
+    "code": "SE-0001",
+    "name": "Selina",
+    "location": "Bogotá",
+    "roomType": "Single",
+    "price": 3900,
+    "dateFrom": "2021-01-23",
+    "dateTo": "2021-11-23",
+    "booked": "NO"
+  },
+  {
+    "code": "SE-0002",
+    "name": "Selina 2",
+    "location": "Bogotá",
+    "roomType": "Doble",
+    "price": 5840,
+    "dateFrom": "2021-01-23",
+    "dateTo": "2021-10-15",
+    "booked": "NO"
+  },
+  {
+    "code": "EC-0003",
+    "name": "El Campín",
+    "location": "Bogotá",
+    "roomType": "Triple",
+    "price": 7020,
+    "dateFrom": "2021-02-15",
+    "dateTo": "2021-03-27",
+    "booked": "NO"
+  },
+  {
+    "code": "CP-0004",
+    "name": "Central Plaza",
+    "location": "Medellín",
+    "roomType": "Múltiple",
+    "price": 8600,
+    "dateFrom": "2021-03-01",
+    "dateTo": "2021-04-17",
+    "booked": "NO"
+  },
+  {
+    "code": "CP-0002",
+    "name": "Central Plaza 2",
+    "location": "Medellín",
+    "roomType": "Doble",
+    "price": 6400,
+    "dateFrom": "2021-02-10",
+    "dateTo": "2021-03-20",
+    "booked": "NO"
+  },
+  {
+    "code": "BG-0004",
+    "name": "Bocagrande",
+    "location": "Cartagena",
+    "roomType": "Múltiple",
+    "price": 9370,
+    "dateFrom": "2021-04-17",
+    "dateTo": "2021-06-12",
+    "booked": "NO"
+  }
+]
