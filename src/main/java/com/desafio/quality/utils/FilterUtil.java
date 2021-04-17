@@ -4,6 +4,7 @@ import com.desafio.quality.dtos.HotelDto;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class FilterUtil {
@@ -23,6 +24,20 @@ public class FilterUtil {
                         && hotel.getLocation().equals(location)
                         && hotel.getBooked().equals("NO"))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Find hotel by its code
+     * @param hotels the list of hotel
+     * @param code hotel
+     */
+    public static HotelDto findHotelByCode(final List<HotelDto> hotels, final String code) {
+        Optional<HotelDto> result = hotels.stream().filter(hotel -> hotel.getCode().equals(code)).findFirst();
+        if (result.isPresent()) {
+            return result.get();
+        } else {
+            throw new IllegalArgumentException("The hotel with code: " + code + " does not exist");
+        }
     }
 
 }

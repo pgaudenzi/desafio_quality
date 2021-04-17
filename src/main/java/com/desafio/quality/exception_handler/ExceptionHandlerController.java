@@ -29,4 +29,11 @@ public class ExceptionHandlerController {
         return new ResponseEntity<>(error, error.getStatus());
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<ErrorDto> handleNullPointer(NullPointerException e) {
+        ErrorDto error = new ErrorDto("NullPointerException", "Please, review the request's data",
+                HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(error, error.getStatus());
+    }
+
 }

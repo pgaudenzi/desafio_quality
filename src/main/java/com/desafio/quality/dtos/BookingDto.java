@@ -7,21 +7,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HotelDto {
+public class BookingDto {
 
-    private String code;
-    private String name;
-    private String location;
-    private String roomType;
-    private int price;
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dateFrom;
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dateTo;
-    private String booked;
+    private String destination;
+    private String hotelCode;
+    private int peopleAmount;
+    private String roomType;
+    private List<PeopleDto> people;
+    private PaymentMethodDto paymentMethod;
 
 }
