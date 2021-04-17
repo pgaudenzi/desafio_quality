@@ -12,8 +12,4 @@ public class DateUtil {
         return LocalDate.parse(date, formatter);
     }
 
-    public static boolean validate(LocalDate dateForm, LocalDate dateTo) {
-        return dateForm.isBefore(dateTo);
-    }
-
 }

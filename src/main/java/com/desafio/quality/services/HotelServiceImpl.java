@@ -64,6 +64,7 @@ public class HotelServiceImpl implements HotelService {
      * @return the response to the request
      * @throws IllegalDateException if the dates are wrong
      */
+    //TODO: ver como hacer para la fecha con formato dd/mm/yyyy
     @Override
     public BookingResponseDto book(BookingRequestDto bookingRequest) throws IllegalDateException {
         final BookingDto booking = bookingRequest.getBooking();
@@ -83,7 +84,12 @@ public class HotelServiceImpl implements HotelService {
         response.setBooking(bookingRequest.getBooking());
         response.setAmount((double) hotel.getPrice() * nights);
         response.setInterest(interests);
-        response.setTotal(response.getAmount() * response.getInterest());
+
+        if (booking.getPaymentMethod().getType().equalsIgnoreCase("debit")) {
+            response.setTotal(response.getAmount());
+        } else {
+            response.setTotal(response.getAmount() * response.getInterest());
+        }
 
         final StatusCodeDto status = new StatusCodeDto(200, "The process ended satisfactorily");
         response.setStatusCode(status);
@@ -100,7 +106,6 @@ public class HotelServiceImpl implements HotelService {
             if (paymentMethod.getDues() < 3) return  1.05;
             if (paymentMethod.getDues() >= 3 && paymentMethod.getDues() <= 6) return 1.10;
             throw new IllegalArgumentException("Max dues allowed is 6");
-
         }
 
         if (paymentMethod.getType().equalsIgnoreCase("debit")) {

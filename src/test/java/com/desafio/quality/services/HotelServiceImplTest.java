@@ -1,6 +1,9 @@
 package com.desafio.quality.services;
 
+import com.desafio.quality.dtos.BookingRequestDto;
+import com.desafio.quality.dtos.BookingResponseDto;
 import com.desafio.quality.dtos.HotelDto;
+import com.desafio.quality.dtos.PaymentMethodDto;
 import com.desafio.quality.exceptions.IllegalDateException;
 import com.desafio.quality.repositories.HotelRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -10,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +30,10 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class HotelServiceImplTest {
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     private List<HotelDto> hotels;
     private Set<String> location;
+
     private HotelService service;
 
     @Mock
@@ -36,7 +42,6 @@ class HotelServiceImplTest {
     @BeforeEach
     void setUp() throws IOException {
         service = new HotelServiceImpl(repository);
-        final ObjectMapper objectMapper = new ObjectMapper();
         hotels = objectMapper.readValue(
                 new File("src/test/resources/test_hotels_db.json"),
                 new TypeReference<List<HotelDto>>() {});
@@ -112,6 +117,103 @@ class HotelServiceImplTest {
         final IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
                 () -> service.getHotels("20/10/2021", "23/11/2021", "NonExistingLocation"));
         assertEquals("The chosen location does not exist", e.getMessage());
+    }
+
+    @Test
+    void shouldPerformBookingRequestWithCreditCard() throws Exception {
+        //Given
+        final BookingRequestDto request = objectMapper.readValue(
+                new File("src/test/resources/test_booking_request.json"),
+                new TypeReference<BookingRequestDto>() {});
+        final BookingResponseDto response = objectMapper.readValue(
+                new File("src/test/resources/test_booking_response.json"),
+                new TypeReference<BookingResponseDto>() {});
+
+        //When
+        when(repository.getAll()).thenReturn(hotels);
+        when(repository.getLocations()).thenReturn(location);
+
+        //Then
+        final BookingResponseDto result = assertDoesNotThrow(() -> service.book(request));
+        assertEquals(response, result);
+
+    }
+
+    @Test
+    void shouldPerformBookingRequestWithDebitCard() throws Exception {
+        //Given
+        final BookingRequestDto request = objectMapper.readValue(
+                new File("src/test/resources/test_booking_request_debit.json"),
+                new TypeReference<BookingRequestDto>() {});
+        final BookingResponseDto response = objectMapper.readValue(
+                new File("src/test/resources/test_booking_response_debit.json"),
+                new TypeReference<BookingResponseDto>() {});
+
+        //When
+        when(repository.getAll()).thenReturn(hotels);
+        when(repository.getLocations()).thenReturn(location);
+
+        //Then
+        final BookingResponseDto result = assertDoesNotThrow(() -> service.book(request));
+        assertEquals(response, result);
+
+    }
+
+    @Test
+    void shouldThrowExceptionWhenDebitHasDues() throws Exception {
+        //Given
+        final BookingRequestDto request = objectMapper.readValue(
+                new File("src/test/resources/test_booking_request_debit.json"),
+                new TypeReference<BookingRequestDto>() {});
+        final PaymentMethodDto paymentMethod = request.getBooking().getPaymentMethod();
+        paymentMethod.setDues(3);
+
+        //When
+        when(repository.getAll()).thenReturn(hotels);
+        when(repository.getLocations()).thenReturn(location);
+
+        //Then
+        final IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> service.book(request));
+        assertEquals("dues are not allowed with debit card", e.getMessage());
+
+    }
+
+    @Test
+    void shouldThrowExceptionWhenPaymentMethodIsCash() throws Exception {
+        //Given
+        final BookingRequestDto request = objectMapper.readValue(
+                new File("src/test/resources/test_booking_request_debit.json"),
+                new TypeReference<BookingRequestDto>() {});
+        final PaymentMethodDto paymentMethod = request.getBooking().getPaymentMethod();
+        paymentMethod.setType("cash");
+
+        //When
+        when(repository.getAll()).thenReturn(hotels);
+        when(repository.getLocations()).thenReturn(location);
+
+        //Then
+        final IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> service.book(request));
+        assertEquals("Only credit or debit allowed", e.getMessage());
+
+    }
+
+    @Test
+    void shouldThrowExceptionWhenDuesAreMoreThanSix() throws Exception {
+        //Given
+        final BookingRequestDto request = objectMapper.readValue(
+                new File("src/test/resources/test_booking_request.json"),
+                new TypeReference<BookingRequestDto>() {});
+        final PaymentMethodDto paymentMethod = request.getBooking().getPaymentMethod();
+        paymentMethod.setDues(12);
+
+        //When
+        when(repository.getAll()).thenReturn(hotels);
+        when(repository.getLocations()).thenReturn(location);
+
+        //Then
+        final IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> service.book(request));
+        assertEquals("Max dues allowed is 6", e.getMessage());
+
     }
 
     private Set<String> initLocations() {
