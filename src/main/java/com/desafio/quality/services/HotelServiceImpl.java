@@ -69,7 +69,7 @@ public class HotelServiceImpl implements HotelService {
     public BookingResponseDto book(BookingRequestDto bookingRequest) throws IllegalDateException {
         final BookingDto booking = bookingRequest.getBooking();
 
-        validateBookingParams(bookingRequest);
+        validateBookingParams(booking, bookingRequest.getUserName());
 
         final HotelDto hotel = FilterUtil.findHotelByCode(repository.getAll(),booking.getHotelCode());
         ValidationsUtil.validateHotel(booking, hotel);
@@ -81,7 +81,7 @@ public class HotelServiceImpl implements HotelService {
 
         BookingResponseDto response = new BookingResponseDto();
         response.setUserName(bookingRequest.getUserName());
-        response.setBooking(bookingRequest.getBooking());
+        response.setBooking(booking);
         response.setAmount((double) hotel.getPrice() * nights);
         response.setInterest(interests);
 
@@ -120,14 +120,10 @@ public class HotelServiceImpl implements HotelService {
     /**
      * Aux method to perform all the validations needed
      */
-    private void validateBookingParams(final BookingRequestDto bookingRequest) throws IllegalDateException {
-        ValidationsUtil.validateMailFormat(bookingRequest.getUserName());
-        ValidationsUtil.validateLocation(bookingRequest.getBooking().getDestination(), repository.getLocations());
-
-        ValidationsUtil.validateDates(bookingRequest.getBooking().getDateFrom(),
-                bookingRequest.getBooking().getDateTo());
-
-        ValidationsUtil.validateRoomType(bookingRequest.getBooking().getPeopleAmount(),
-                bookingRequest.getBooking().getRoomType());
+    private void validateBookingParams(final BookingDto booking, final String userName) throws IllegalDateException {
+        ValidationsUtil.validateMailFormat(userName);
+        ValidationsUtil.validateLocation(booking.getDestination(), repository.getLocations());
+        ValidationsUtil.validateDates(booking.getDateFrom(), booking.getDateTo());
+        ValidationsUtil.validateRoomType(booking.getPeopleAmount(), booking.getRoomType());
     }
 }

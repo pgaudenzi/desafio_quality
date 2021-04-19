@@ -1,0 +1,110 @@
+[
+  {
+    "nro": "BAPI-1235",
+    "origin": "Buenos Aires",
+    "destination": "Puerto Iguazú",
+    "sitType": "Economy",
+    "price": 6500,
+    "departure": "2021-02-10",
+    "arrival": "2021-02-15"
+  },
+  {
+    "nro": "PIBA-1420",
+    "origin": "Puerto Iguazú",
+    "destination": "Bogotá",
+    "sitType": "Business",
+    "price": 43200,
+    "departure": "2021-02-10",
+    "arrival": "2021-02-20"
+  },
+  {
+    "nro": "PIBA-1420",
+    "origin": "Puerto Iguazú",
+    "destination": "Bogotá",
+    "sitType": "Economy",
+    "price": 25735,
+    "departure": "2021-02-10",
+    "arrival": "2021-02-21"
+  },
+  {
+    "nro": "BATU-5536",
+    "origin": "Buenos Aires",
+    "destination": "Tucumán",
+    "sitType": "Economy",
+    "price": 7320,
+    "departure": "2021-02-10",
+    "arrival": "2021-02-17"
+  },
+  {
+    "nro": "TUPI-3369",
+    "origin": "Tucumán",
+    "destination": "Puerto Iguazú",
+    "sitType": "Business",
+    "price": 12530,
+    "departure": "2021-02-12",
+    "arrival": "2021-02-23"
+  },
+  {
+    "nro": "TUPI-3369",
+    "origin": "Tucumán",
+    "destination": "Puerto Iguazú",
+    "sitType": "Economy",
+    "price": 5400,
+    "departure": "2021-01-02",
+    "arrival": "2021-01-16"
+  },
+  {
+    "nro": "BOCA-4213",
+    "origin": "Bogotá",
+    "destination": "Cartagena",
+    "sitType": "Economy",
+    "price": 8000,
+    "departure": "2021-01-23",
+    "arrival": "2021-02-05"
+  },
+  {
+    "nro": "CAME-0321",
+    "origin": "Cartagena",
+    "destination": "Medellín",
+    "sitType": "Economy",
+    "price": 7800,
+    "departure": "2021-01-23",
+    "arrival": "2021-01-31"
+  },
+  {
+    "nro": "BOBA-6567",
+    "origin": "Bogotá",
+    "destination": "Buenos Aires",
+    "sitType": "Business",
+    "price": 57000,
+    "departure": "2021-02-15",
+    "arrival": "2021-02-28"
+  },
+  {
+    "nro": "BOBA-6567",
+    "origin": "Bogotá",
+    "destination": "Buenos Aires",
+    "sitType": "Economy",
+    "price": 39860,
+    "departure": "2021-03-01",
+    "arrival": "2021-03-14"
+  },
+  {
+    "nro": "BOME-4442",
+    "origin": "Bogotá",
+    "destination": "Medellín",
+    "sitType": "Economy",
+    "price": 11000,
+    "departure": "2021-02-10",
+    "arrival": "2021-02-24"
+  },
+  {
+    "nro": "MEPI-9986",
+    "origin": "Medellín",
+    "destination": "Puerto Iguazú",
+    "sitType": "Business",
+    "price": 41640,
+    "departure": "2021-04-17",
+    "arrival": "2021-05-02"
+  }
+]

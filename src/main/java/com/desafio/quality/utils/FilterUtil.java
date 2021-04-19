@@ -1,5 +1,6 @@
 package com.desafio.quality.utils;
 
+import com.desafio.quality.dtos.FlightDto;
 import com.desafio.quality.dtos.HotelDto;
 
 import java.time.LocalDate;
@@ -38,6 +39,20 @@ public class FilterUtil {
         } else {
             throw new IllegalArgumentException("The hotel with code: " + code + " does not exist");
         }
+    }
+
+    /**
+     * Filters flights according to the params
+     * @return filtered flights
+     */
+    public static List<FlightDto> filterFlights(List<FlightDto> flights, LocalDate dateFrom, LocalDate dateTo,
+                                                      String origin, String destination) {
+        return flights.stream()
+                .filter(flight -> (dateFrom.isAfter(flight.getDeparture()) || dateFrom.equals(flight.getDeparture()))
+                        && (dateTo.isBefore(flight.getArrival()) || dateTo.equals(flight.getArrival()))
+                        && flight.getDestination().equalsIgnoreCase(destination)
+                        && flight.getOrigin().equalsIgnoreCase(origin))
+                .collect(Collectors.toList());
     }
 
 }

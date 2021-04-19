@@ -54,7 +54,7 @@ public class HotelRepositoryImpl implements HotelRepository {
     }
 
     /**
-     * Aux method to get the products from the csv
+     * Aux method to get the hotels from the csv
      * @return all the hotels in the csv
      */
     private List<HotelDto> loadDatabase() {

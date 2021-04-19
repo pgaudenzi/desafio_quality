@@ -36,4 +36,11 @@ public class ExceptionHandlerController {
         return new ResponseEntity<>(error, error.getStatus());
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorDto> handleIllegalArgumentException(IllegalArgumentException e) {
+        ErrorDto error = new ErrorDto("IllegalArgumentException", e.getMessage(),
+                HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(error, error.getStatus());
+    }
+
 }
