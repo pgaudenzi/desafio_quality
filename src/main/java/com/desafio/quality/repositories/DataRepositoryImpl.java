@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Repository to read from csv files
+ */
 @Repository
 public class DataRepositoryImpl implements DataRepository {
 

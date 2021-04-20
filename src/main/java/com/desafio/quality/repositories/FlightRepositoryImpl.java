@@ -2,7 +2,6 @@ package com.desafio.quality.repositories;
 
 import com.desafio.quality.dtos.FlightDto;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;

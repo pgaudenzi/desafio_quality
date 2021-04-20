@@ -23,7 +23,10 @@ public class FlightServiceImpl implements FlightService {
     }
 
     /**
-     * Get fligths
+     * Get flights.
+     * If there are no params, all flights are return
+     * If only some of the params are null, then throw IllegalArgumentException
+     * If the dates are specified, and if they are valid, return all the flights available between the dates.
      */
     @Override
     public List<FlightDto> getFlights(String dateFrom, String dateTo, String origin, String destination)
