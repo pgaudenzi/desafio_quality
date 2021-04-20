@@ -1,14 +1,9 @@
 package com.desafio.quality.repositories;
 
 import com.desafio.quality.dtos.HotelDto;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,15 +14,17 @@ import java.util.Set;
 @Repository
 public class HotelRepositoryImpl implements HotelRepository {
 
-    private static final String USERS_DB_PATH = "/src/main/resources/hotels_db.csv";
-    private static final String ABS_PATH = new File("").getAbsolutePath();
-
     private final List<HotelDto> hotels;
 
+    private final String hotelsDbPath;
+    private final DataRepository dataRepository;
+
     /**
-     * Constructor - needed to maintain the hotels in memory and manage them from there
+     * Constructor
      */
-    public HotelRepositoryImpl() {
+    public HotelRepositoryImpl(@Value("${hotels.db.path}") String hotelsDbPath, DataRepository dataRepository ) {
+        this.hotelsDbPath = hotelsDbPath;
+        this.dataRepository = dataRepository;
         this.hotels = loadDatabase();
     }
 
@@ -57,18 +54,11 @@ public class HotelRepositoryImpl implements HotelRepository {
      * @return all the hotels in the csv
      */
     private List<HotelDto> loadDatabase() {
-        List<HotelDto> hotels = new ArrayList<>();
+        List<String[]> hotelsData = dataRepository.loadDatabase(hotelsDbPath);
+        List<HotelDto> hotels = new ArrayList<>();;
 
-        try (CSVReader reader = new CSVReaderBuilder(
-                new FileReader(ABS_PATH + USERS_DB_PATH))
-                .withSkipLines(1).build()){
-
-            String[] row;
-            while ((row = reader.readNext()) != null) {
-                hotels.add(objectMapper(row));
-            }
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+        for (String[] row : hotelsData) {
+            hotels.add(objectMapper(row));
         }
 
         return hotels;
@@ -79,7 +69,7 @@ public class HotelRepositoryImpl implements HotelRepository {
      * @param data to parse
      * @return the parsed object
      */
-    private HotelDto objectMapper(String[] data) throws ParseException {
+    private HotelDto objectMapper(String[] data) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         String code = data[0];
