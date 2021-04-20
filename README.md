@@ -31,13 +31,13 @@ Parametros:
 
 Parametros:
 
-| Parametros         | TIPO           | Descripcion                |
-| -------------------| -------------- |----------------------------|
-|  Fecha Entrada     | Date           | (dd/mm/aaaa) Ej: 23/02/2021|
-|  Fecha Salida      | Date           | (dd/mm/aaaa) Ej: 25/02/2021|
-|  Destino           | String         |  Puerto Iguazú             |
-|Cantidad de personas| int            |  Puerto Iguazú             |
-|Tipo de habitacion  | String         |  Puerto Iguazú             |
+| Parametros         | TIPO              | Descripcion                |
+| -------------------| --------------    |----------------------------|
+|  Fecha Entrada     | Date              | (dd/mm/aaaa) Ej: 23/02/2021|
+|  Fecha Salida      | Date              | (dd/mm/aaaa) Ej: 25/02/2021|
+|  Destino           | String            |  Puerto Iguazú             |
+|Cantidad de personas| int               |  Puerto Iguazú             |
+|Tipo de habitacion  | String (en ingles)|  Puerto Iguazú             |
 
 Payload:
 ```json

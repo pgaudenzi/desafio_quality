@@ -66,7 +66,7 @@ public class ValidationsUtil {
      */
     public static void validateHotel(final BookingDto booking, final HotelDto hotel) {
         if (!booking.getDestination().equalsIgnoreCase(hotel.getLocation())
-                && !booking.getRoomType().equals(hotel.getRoomType())) {
+                || !booking.getRoomType().equalsIgnoreCase(hotel.getRoomType())) {
             throw new IllegalArgumentException("The parameters do not match with the hotel data");
         }
     }
