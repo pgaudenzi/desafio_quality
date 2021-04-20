@@ -1,14 +1,14 @@
 # Documentacion
 
 ## Hoteles
-#### Obtiener un listado de todos los hoteles diponibles.
+#### 1) Obtener un listado de todos los hoteles diponibles.
 
 | Method | SIGN           |
 | ------ | -------------- |
 |  GET   | /api/v1/hotels |
 
 
-#### Obtener un listado de todos los hoteles disponibles en un determinado rango de fechas y según el destino seleccionado.
+#### 2) Obtener un listado de todos los hoteles disponibles en un determinado rango de fechas y según el destino seleccionado.
 
 | Method | SIGN                                                                            |
 | ------ | ------------------------------------------------------------------------------  |
@@ -23,7 +23,7 @@ Parametros:
 |  Destino      | String         |  Puerto Iguazú             |
 
 
-#### Reserva de hotel, indicando cantidad de personas, fecha de entrada, fecha de salida y tipo de habitacion
+#### 3) Reserva de hotel, indicando cantidad de personas, fecha de entrada, fecha de salida y tipo de habitacion
 
 | Method | SIGN           |
 | ------ | -------------- |
@@ -77,13 +77,13 @@ Payload:
 
 ## Vuelos
 
-#### Obtener un listado de vuelos disponibles
+#### 1) Obtener un listado de vuelos disponibles
 
 | Method | SIGN           |
 | ------ | -------------- |
 |  GET   | /api/v1/flights|
 
-#### Obtener un listado de todos los vuelos disponibles en un determinado rango de fechas y según el destino y el origen seleccionados
+#### 2) Obtener un listado de todos los vuelos disponibles en un determinado rango de fechas y según el destino y el origen seleccionados
 
 | Method | SIGN                                                                                               |
 | ------ | -------------------------------------------------------------------------------------------------  |
@@ -99,7 +99,7 @@ Parametros:
 |  Destino      | String         |  Buenos Aires              |
 
 
-#### Reserva de vuelo, indicando cantidad de personas, origen, destino, fecha de ida y fecha de vuelta.
+#### 3) Reserva de vuelo, indicando cantidad de personas, origen, destino, fecha de ida y fecha de vuelta.
 
 | Method | SIGN                      |
 | ------ | ------------------------- |
