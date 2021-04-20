@@ -5,8 +5,8 @@
     "location": "Puerto Iguazú",
     "roomType": "Doble",
     "price": 6300,
-    "dateFrom": "2021-02-10",
-    "dateTo": "2021-03-20",
+    "dateFrom": "10/02/2021",
+    "dateTo": "20/03/2021",
     "booked": "NO"
   },
   {
@@ -15,8 +15,8 @@
     "location": "Puerto Iguazú",
     "roomType": "Triple",
     "price": 8200,
-    "dateFrom": "2021-02-10",
-    "dateTo": "2021-03-23",
+    "dateFrom": "10/02/2021",
+    "dateTo": "23/03/2021",
     "booked": "NO"
   },
   {
@@ -25,8 +25,8 @@
     "location": "Buenos Aires",
     "roomType": "Single",
     "price": 5435,
-    "dateFrom": "2021-02-10",
-    "dateTo": "2021-03-19",
+    "dateFrom": "10/02/2021",
+    "dateTo": "19/03/2021",
     "booked": "NO"
   },
   {
@@ -35,8 +35,8 @@
     "location": "Buenos Aires",
     "roomType": "Doble",
     "price": 7200,
-    "dateFrom": "2021-02-12",
-    "dateTo": "2021-04-17",
+    "dateFrom": "12/02/2021",
+    "dateTo": "17/04/2021",
     "booked": "NO"
   },
   {
@@ -45,8 +45,8 @@
     "location": "Tucumán",
     "roomType": "Doble",
     "price": 5790,
-    "dateFrom": "2021-04-17",
-    "dateTo": "2021-05-23",
+    "dateFrom": "17/04/2021",
+    "dateTo": "23/05/2021",
     "booked": "NO"
   },
   {
@@ -55,8 +55,8 @@
     "location": "Tucumán",
     "roomType": "Single",
     "price": 4150,
-    "dateFrom": "2021-01-02",
-    "dateTo": "2021-02-19",
+    "dateFrom": "02/01/2021",
+    "dateTo": "19/02/2021",
     "booked": "NO"
   },
   {
@@ -65,8 +65,8 @@
     "location": "Bogotá",
     "roomType": "Single",
     "price": 3900,
-    "dateFrom": "2021-01-23",
-    "dateTo": "2021-11-23",
+    "dateFrom": "23/01/2021",
+    "dateTo": "23/11/2021",
     "booked": "NO"
   },
   {
@@ -75,8 +75,8 @@
     "location": "Bogotá",
     "roomType": "Doble",
     "price": 5840,
-    "dateFrom": "2021-01-23",
-    "dateTo": "2021-10-15",
+    "dateFrom": "23/01/2021",
+    "dateTo": "15/10/2021",
     "booked": "NO"
   },
   {
@@ -85,8 +85,8 @@
     "location": "Bogotá",
     "roomType": "Triple",
     "price": 7020,
-    "dateFrom": "2021-02-15",
-    "dateTo": "2021-03-27",
+    "dateFrom": "15/02/2021",
+    "dateTo": "27/03/2021",
     "booked": "NO"
   },
   {
@@ -95,8 +95,8 @@
     "location": "Medellín",
     "roomType": "Múltiple",
     "price": 8600,
-    "dateFrom": "2021-03-01",
-    "dateTo": "2021-04-17",
+    "dateFrom": "01/03/2021",
+    "dateTo": "17/04/2021",
     "booked": "NO"
   },
   {
@@ -105,8 +105,8 @@
     "location": "Medellín",
     "roomType": "Doble",
     "price": 6400,
-    "dateFrom": "2021-02-10",
-    "dateTo": "2021-03-20",
+    "dateFrom": "10/02/2021",
+    "dateTo": "20/03/2021",
     "booked": "NO"
   },
   {
@@ -115,8 +115,8 @@
     "location": "Cartagena",
     "roomType": "Múltiple",
     "price": 9370,
-    "dateFrom": "2021-04-17",
-    "dateTo": "2021-06-12",
+    "dateFrom": "17/04/2021",
+    "dateTo": "12/06/2021",
     "booked": "NO"
   }
 ]

@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingResponseDto {
+public class BookingResponseDto <T> {
 
     private String userName;
     private double amount;
     private double interest;
     private double total;
-    private BookingDto booking;
+    private T booking;
     private StatusCodeDto statusCode;
 
 }

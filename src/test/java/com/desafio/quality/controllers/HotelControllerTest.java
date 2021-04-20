@@ -1,5 +1,6 @@
 package com.desafio.quality.controllers;
 
+import com.desafio.quality.dtos.BookingDto;
 import com.desafio.quality.dtos.BookingRequestDto;
 import com.desafio.quality.dtos.BookingResponseDto;
 import com.desafio.quality.dtos.HotelDto;
@@ -28,6 +29,8 @@ class HotelControllerTest {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private List<HotelDto> hotels;
+    private BookingResponseDto<BookingDto> response;
+    private BookingRequestDto<BookingDto> request;
 
     private HotelController controller;
 
@@ -40,6 +43,12 @@ class HotelControllerTest {
         hotels = objectMapper.readValue(
                 new File("src/test/resources/test_hotels_db.json"),
                 new TypeReference<List<HotelDto>>() {});
+        response = objectMapper.readValue(
+                new File("src/test/resources/test_booking_response.json"),
+                new TypeReference<BookingResponseDto<BookingDto>>() {});
+        request = objectMapper.readValue(
+                new File("src/test/resources/test_booking_request.json"),
+                new TypeReference<BookingRequestDto<BookingDto>>() {});
     }
 
     @Test
@@ -55,14 +64,9 @@ class HotelControllerTest {
 
     @Test
     void testPostBooking() throws Exception {
-        //Given
-        final BookingResponseDto response = objectMapper.readValue(
-                new File("src/test/resources/test_booking_response.json"),
-                new TypeReference<BookingResponseDto>() {});
-
         //When
         when(service.book(any())).thenReturn(response);
-        final ResponseEntity<BookingResponseDto> result = controller.performBooking(new BookingRequestDto());
+        final ResponseEntity<BookingResponseDto<BookingDto>> result = controller.performBooking(request);
 
         //Then
         assertEquals(response, result.getBody());

@@ -55,4 +55,13 @@ public class FilterUtil {
                 .collect(Collectors.toList());
     }
 
+    public static FlightDto findFlightByNumber(final List<FlightDto> flights, final String nro) {
+        Optional<FlightDto> result = flights.stream().filter(flight -> flight.getNro().equals(nro)).findFirst();
+        if (result.isPresent()) {
+            return result.get();
+        } else {
+            throw new IllegalArgumentException("The flight with number: " + nro + " does not exist");
+        }
+    }
+
 }

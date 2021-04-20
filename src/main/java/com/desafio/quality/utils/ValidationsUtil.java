@@ -1,6 +1,8 @@
 package com.desafio.quality.utils;
 
 import com.desafio.quality.dtos.BookingDto;
+import com.desafio.quality.dtos.FlightDto;
+import com.desafio.quality.dtos.FlightReservationDto;
 import com.desafio.quality.dtos.HotelDto;
 import com.desafio.quality.exceptions.IllegalDateException;
 
@@ -67,6 +69,25 @@ public class ValidationsUtil {
                 && !booking.getRoomType().equals(hotel.getRoomType())) {
             throw new IllegalArgumentException("The parameters do not match with the hotel data");
         }
+    }
+
+    /**
+     * Method to validate if the flight data in the booking are right
+     */
+    public static void validateFlight(final FlightReservationDto reservation, final FlightDto flight) {
+        if ((!reservation.getDestination().equalsIgnoreCase(flight.getDestination()))
+                || !reservation.getOrigin().equalsIgnoreCase(flight.getOrigin())
+                || !reservation.getSeatType().equalsIgnoreCase(flight.getSitType())) {
+            throw new IllegalArgumentException("The parameters do not match with the flight data");
+        }
+    }
+
+    /**
+     * Method to validate if the number of people declared is the same to the number in the list
+     */
+    public static void validatePeopleAmount(final int declaredAmount, final int peopleAmount) {
+        if (declaredAmount != peopleAmount) throw new IllegalArgumentException("You asked a seat for " + declaredAmount +
+                " and there are " + peopleAmount + " people in the reservation");
     }
 
 }

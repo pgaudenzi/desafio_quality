@@ -1,9 +1,6 @@
 package com.desafio.quality.services;
 
-import com.desafio.quality.dtos.BookingRequestDto;
-import com.desafio.quality.dtos.BookingResponseDto;
-import com.desafio.quality.dtos.HotelDto;
-import com.desafio.quality.dtos.PaymentMethodDto;
+import com.desafio.quality.dtos.*;
 import com.desafio.quality.exceptions.IllegalDateException;
 import com.desafio.quality.repositories.HotelRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -122,12 +119,12 @@ class HotelServiceImplTest {
     @Test
     void shouldPerformBookingRequestWithCreditCard() throws Exception {
         //Given
-        final BookingRequestDto request = objectMapper.readValue(
+        final BookingRequestDto<BookingDto> request = objectMapper.readValue(
                 new File("src/test/resources/test_booking_request.json"),
-                new TypeReference<BookingRequestDto>() {});
-        final BookingResponseDto response = objectMapper.readValue(
+                new TypeReference<BookingRequestDto<BookingDto>>() {});
+        final BookingResponseDto<BookingDto> response = objectMapper.readValue(
                 new File("src/test/resources/test_booking_response.json"),
-                new TypeReference<BookingResponseDto>() {});
+                new TypeReference<BookingResponseDto<BookingDto>>() {});
 
         //When
         when(repository.getAll()).thenReturn(hotels);
@@ -142,19 +139,19 @@ class HotelServiceImplTest {
     @Test
     void shouldPerformBookingRequestWithDebitCard() throws Exception {
         //Given
-        final BookingRequestDto request = objectMapper.readValue(
+        final BookingRequestDto<BookingDto> request = objectMapper.readValue(
                 new File("src/test/resources/test_booking_request_debit.json"),
-                new TypeReference<BookingRequestDto>() {});
-        final BookingResponseDto response = objectMapper.readValue(
+                new TypeReference<BookingRequestDto<BookingDto>>() {});
+        final BookingResponseDto<BookingDto> response = objectMapper.readValue(
                 new File("src/test/resources/test_booking_response_debit.json"),
-                new TypeReference<BookingResponseDto>() {});
+                new TypeReference<BookingResponseDto<BookingDto>>() {});
 
         //When
         when(repository.getAll()).thenReturn(hotels);
         when(repository.getLocations()).thenReturn(location);
 
         //Then
-        final BookingResponseDto result = assertDoesNotThrow(() -> service.book(request));
+        final BookingResponseDto<BookingDto> result = assertDoesNotThrow(() -> service.book(request));
         assertEquals(response, result);
 
     }
@@ -162,9 +159,9 @@ class HotelServiceImplTest {
     @Test
     void shouldThrowExceptionWhenDebitHasDues() throws Exception {
         //Given
-        final BookingRequestDto request = objectMapper.readValue(
+        final BookingRequestDto<BookingDto> request = objectMapper.readValue(
                 new File("src/test/resources/test_booking_request_debit.json"),
-                new TypeReference<BookingRequestDto>() {});
+                new TypeReference<BookingRequestDto<BookingDto>>() {});
         final PaymentMethodDto paymentMethod = request.getBooking().getPaymentMethod();
         paymentMethod.setDues(3);
 
@@ -181,9 +178,9 @@ class HotelServiceImplTest {
     @Test
     void shouldThrowExceptionWhenPaymentMethodIsCash() throws Exception {
         //Given
-        final BookingRequestDto request = objectMapper.readValue(
+        final BookingRequestDto<BookingDto> request = objectMapper.readValue(
                 new File("src/test/resources/test_booking_request_debit.json"),
-                new TypeReference<BookingRequestDto>() {});
+                new TypeReference<BookingRequestDto<BookingDto>>() {});
         final PaymentMethodDto paymentMethod = request.getBooking().getPaymentMethod();
         paymentMethod.setType("cash");
 
@@ -200,9 +197,9 @@ class HotelServiceImplTest {
     @Test
     void shouldThrowExceptionWhenDuesAreMoreThanSix() throws Exception {
         //Given
-        final BookingRequestDto request = objectMapper.readValue(
+        final BookingRequestDto<BookingDto> request = objectMapper.readValue(
                 new File("src/test/resources/test_booking_request.json"),
-                new TypeReference<BookingRequestDto>() {});
+                new TypeReference<BookingRequestDto<BookingDto>>() {});
         final PaymentMethodDto paymentMethod = request.getBooking().getPaymentMethod();
         paymentMethod.setDues(12);
 

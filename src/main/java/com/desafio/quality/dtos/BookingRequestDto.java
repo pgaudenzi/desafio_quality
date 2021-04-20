@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingRequestDto {
+public class BookingRequestDto <T> {
 
     private String userName;
-    private BookingDto booking;
+    private T booking;
 
 }

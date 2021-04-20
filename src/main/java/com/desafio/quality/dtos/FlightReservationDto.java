@@ -8,23 +8,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class HotelDto {
+@NoArgsConstructor
+public class FlightReservationDto {
 
-    private String code;
-    private String name;
-    private String location;
-    private String roomType;
-    private int price;
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dateFrom;
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dateTo;
-    private String booked;
+    private String origin;
+    private String destination;
+    private String flightNumber;
+    private int seats;
+    private String seatType;
+    private List<PeopleDto> people;
+    private PaymentMethodDto paymentMethod;
 
 }

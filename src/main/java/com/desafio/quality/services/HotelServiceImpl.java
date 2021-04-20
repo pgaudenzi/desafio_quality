@@ -5,6 +5,7 @@ import com.desafio.quality.exceptions.IllegalDateException;
 import com.desafio.quality.repositories.HotelRepository;
 import com.desafio.quality.utils.DateUtil;
 import com.desafio.quality.utils.FilterUtil;
+import com.desafio.quality.utils.PaymentUtil;
 import com.desafio.quality.utils.ValidationsUtil;
 import org.springframework.stereotype.Service;
 
@@ -64,22 +65,24 @@ public class HotelServiceImpl implements HotelService {
      * @return the response to the request
      * @throws IllegalDateException if the dates are wrong
      */
-    //TODO: ver como hacer para la fecha con formato dd/mm/yyyy
     @Override
-    public BookingResponseDto book(BookingRequestDto bookingRequest) throws IllegalDateException {
+    public BookingResponseDto<BookingDto> book(BookingRequestDto<BookingDto> bookingRequest) throws IllegalDateException {
         final BookingDto booking = bookingRequest.getBooking();
 
-        validateBookingParams(booking, bookingRequest.getUserName());
+        ValidationsUtil.validateLocation(booking.getDestination(), repository.getLocations());
 
-        final HotelDto hotel = FilterUtil.findHotelByCode(repository.getAll(),booking.getHotelCode());
+        final List<HotelDto> hotels = FilterUtil.filterHotels(repository.getAll(), booking.getDateFrom(),
+                booking.getDateTo(), booking.getDestination());
+
+        final HotelDto hotel = FilterUtil.findHotelByCode(hotels,booking.getHotelCode());
         ValidationsUtil.validateHotel(booking, hotel);
 
-        final double interests = calculateInterests(booking.getPaymentMethod());
+        final double interests = PaymentUtil.calculateInterests(booking.getPaymentMethod());
         final int nights = Period.between(booking.getDateFrom(), booking.getDateTo()).getDays();
 
         hotel.setBooked("SI");
 
-        BookingResponseDto response = new BookingResponseDto();
+        BookingResponseDto<BookingDto> response = new BookingResponseDto<>();
         response.setUserName(bookingRequest.getUserName());
         response.setBooking(booking);
         response.setAmount((double) hotel.getPrice() * nights);
@@ -97,33 +100,4 @@ public class HotelServiceImpl implements HotelService {
         return response;
     }
 
-    /**
-     * Aux method to calculate card interest
-     */
-    private double calculateInterests(PaymentMethodDto paymentMethod) {
-
-        if (paymentMethod.getType().equalsIgnoreCase("credit")) {
-            if (paymentMethod.getDues() < 3) return  1.05;
-            if (paymentMethod.getDues() >= 3 && paymentMethod.getDues() <= 6) return 1.10;
-            throw new IllegalArgumentException("Max dues allowed is 6");
-        }
-
-        if (paymentMethod.getType().equalsIgnoreCase("debit")) {
-            if (paymentMethod.getDues() != 0)
-                throw new IllegalArgumentException("dues are not allowed with debit card");
-            return 0.0;
-        }
-
-        throw new IllegalArgumentException("Only credit or debit allowed");
-    }
-
-    /**
-     * Aux method to perform all the validations needed
-     */
-    private void validateBookingParams(final BookingDto booking, final String userName) throws IllegalDateException {
-        ValidationsUtil.validateMailFormat(userName);
-        ValidationsUtil.validateLocation(booking.getDestination(), repository.getLocations());
-        ValidationsUtil.validateDates(booking.getDateFrom(), booking.getDateTo());
-        ValidationsUtil.validateRoomType(booking.getPeopleAmount(), booking.getRoomType());
-    }
 }

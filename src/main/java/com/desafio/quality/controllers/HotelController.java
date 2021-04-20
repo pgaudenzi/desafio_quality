@@ -1,10 +1,12 @@
 package com.desafio.quality.controllers;
 
+import com.desafio.quality.dtos.BookingDto;
 import com.desafio.quality.dtos.BookingRequestDto;
 import com.desafio.quality.dtos.BookingResponseDto;
 import com.desafio.quality.dtos.HotelDto;
 import com.desafio.quality.exceptions.IllegalDateException;
 import com.desafio.quality.services.HotelService;
+import com.desafio.quality.utils.ValidationsUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +31,14 @@ public class HotelController {
     }
 
     @PostMapping("/booking")
-    public ResponseEntity<BookingResponseDto> performBooking(@RequestBody BookingRequestDto bookingRequest)
+    public ResponseEntity<BookingResponseDto<BookingDto>> performBooking(@RequestBody BookingRequestDto<BookingDto> bookingRequest)
             throws IllegalDateException {
+        //Params validations
+        ValidationsUtil.validateMailFormat(bookingRequest.getUserName());
+        ValidationsUtil.validateDates(bookingRequest.getBooking().getDateFrom(), bookingRequest.getBooking().getDateTo());
+        ValidationsUtil.validateRoomType(bookingRequest.getBooking().getPeopleAmount(), bookingRequest.getBooking().getRoomType());
+        ValidationsUtil.validatePeopleAmount(bookingRequest.getBooking().getPeopleAmount(), bookingRequest.getBooking().getPeople().size());
+
         return new ResponseEntity<>(service.book(bookingRequest), HttpStatus.OK);
     }
 

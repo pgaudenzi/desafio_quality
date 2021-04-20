@@ -1,11 +1,11 @@
 {
   "userName": "seba_gonzalez@unmail.com",
-  "amount": 72000.0,
+  "amount": 36000.0,
   "interest": 1.1,
-  "total": 79200.0,
+  "total": 39600.0,
   "booking": {
-    "dateFrom": "2021-11-10",
-    "dateTo": "2021-11-20",
+    "dateFrom": "12/02/2021",
+    "dateTo": "17/04/2021",
     "destination": "Buenos Aires",
     "hotelCode": "BH-0002",
     "peopleAmount": 2,
