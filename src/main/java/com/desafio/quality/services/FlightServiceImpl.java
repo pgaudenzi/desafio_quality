@@ -23,13 +23,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     /**
-     *
-     * @param dateFrom
-     * @param dateTo
-     * @param origin
-     * @param destination
-     * @return
-     * @throws IllegalDateException
+     * Get fligths
      */
     @Override
     public List<FlightDto> getFlights(String dateFrom, String dateTo, String origin, String destination)
@@ -55,10 +49,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     /**
-     *
-     * @param request
-     * @return
-     * @throws AvailabilityException
+     * Process a reservation request
      */
     @Override
     public BookingResponseDto<FlightReservationDto> book(BookingRequestDto<FlightReservationDto> request) throws AvailabilityException {
