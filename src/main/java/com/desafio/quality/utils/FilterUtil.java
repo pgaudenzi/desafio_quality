@@ -37,7 +37,7 @@ public class FilterUtil {
         if (result.isPresent()) {
             return result.get();
         } else {
-            throw new IllegalArgumentException("The hotel with code: " + code + " does not exist");
+            throw new IllegalArgumentException("The hotel with code: " + code + " does not exist or is not available for booking");
         }
     }
 

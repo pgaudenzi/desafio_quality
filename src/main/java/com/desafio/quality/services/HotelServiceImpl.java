@@ -72,21 +72,32 @@ public class HotelServiceImpl implements HotelService {
     public BookingResponseDto<BookingDto> book(BookingRequestDto<BookingDto> bookingRequest) throws IllegalDateException {
         final BookingDto booking = bookingRequest.getBooking();
 
+        //Validate locations
         ValidationsUtil.validateLocation(booking.getDestination(), repository.getLocations());
 
+        //Filter hotels according params
         final List<HotelDto> hotels = FilterUtil.filterHotels(repository.getAll(), booking.getDateFrom(),
                 booking.getDateTo(), booking.getDestination());
 
+        //Validate hotel data
         final HotelDto hotel = FilterUtil.findHotelByCode(hotels,booking.getHotelCode());
         ValidationsUtil.validateHotel(booking, hotel);
 
+        //Book hotel
+        hotel.setBooked("SI");
+
+        return buildBookingResponse(bookingRequest.getUserName(), booking, hotel);
+    }
+
+    /**
+     * Aux method to build a booking response
+     */
+    public BookingResponseDto<BookingDto> buildBookingResponse(String userName, BookingDto booking, HotelDto hotel) {
         final double interests = PaymentUtil.calculateInterests(booking.getPaymentMethod());
         final int nights = Period.between(booking.getDateFrom(), booking.getDateTo()).getDays();
 
-        hotel.setBooked("SI");
-
         BookingResponseDto<BookingDto> response = new BookingResponseDto<>();
-        response.setUserName(bookingRequest.getUserName());
+        response.setUserName(userName);
         response.setBooking(booking);
         response.setAmount((double) hotel.getPrice() * nights);
         response.setInterest(interests);
@@ -102,5 +113,4 @@ public class HotelServiceImpl implements HotelService {
 
         return response;
     }
-
 }
