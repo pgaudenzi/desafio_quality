@@ -89,7 +89,7 @@ public class FlightServiceImpl implements FlightService {
         if (reservation.getPaymentMethod().getType().equalsIgnoreCase("debit")) {
             response.setTotal(response.getAmount());
         } else {
-            response.setTotal(response.getAmount() * response.getInterest());
+            response.setTotal(Math.round(response.getAmount() * response.getInterest()));
         }
 
         response.setBooking(reservation);

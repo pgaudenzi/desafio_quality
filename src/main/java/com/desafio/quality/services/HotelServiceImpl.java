@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Service to get the hotels
@@ -42,7 +43,9 @@ public class HotelServiceImpl implements HotelService {
     public List<HotelDto> getHotels(final String dateFrom, final String dateTo, final String location) throws IllegalDateException {
         List<HotelDto> hotels = repository.getAll();
         if (dateFrom == null && dateTo == null && location == null) {
-            return hotels;
+            return hotels.stream()
+                    .filter(hotel -> hotel.getBooked().equalsIgnoreCase("NO"))
+                    .collect(Collectors.toList());
         }
 
         if (dateFrom == null || dateTo == null || location == null) {

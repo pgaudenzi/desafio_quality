@@ -139,7 +139,7 @@ class FlightServiceImplTest {
 
         //Then
         final BookingResponseDto<FlightReservationDto> result = assertDoesNotThrow(() -> service.book(request));
-        assertEquals(response, result);
+           assertEquals(response, result);
     }
 
     @Test

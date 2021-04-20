@@ -2,7 +2,7 @@
   "userName": "seba_gonzalez@unmail.com",
   "amount": 13000.0,
   "interest": 1.1,
-  "total": 14300.000000000002,
+  "total": 14300.0,
   "booking": {
     "dateFrom": "10/02/2021",
     "dateTo": "14/02/2021",
